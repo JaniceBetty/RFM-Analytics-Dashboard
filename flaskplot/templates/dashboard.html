@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>RFM Customer Analytics Dashboard</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="bg-light" style="font-family: 'Poppins', sans-serif;">
+
+  <!-- 🔷 Top Navbar -->
+  <nav class="navbar navbar-dark bg-dark px-4">
+    <span class="navbar-brand mb-0 h5">Customer Intelligence Suite</span>
+  </nav>
+
+  <!-- 🔷 Dashboard Header -->
+  <div class="dashboard-header text-center">
+    <h1 class="dashboard-title">📊 RFM Customer Analytics Dashboard</h1>
+
+    <p class="dashboard-subtitle mt-3">
+      Advanced customer segmentation using RFM (Recency, Frequency, Monetary) analysis
+      on the Online Retail Dataset (UCI Machine Learning Repository) to identify
+      high-value customers and revenue-driving segments.
+    </p>
+  </div>
+
+  <hr class="my-5">
+
+  <!-- 🔷 KPI Section -->
+  <div class="container-fluid mb-4">
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="card shadow-sm p-4 text-center">
+          <h6 class="text-muted">Total Revenue</h6>
+          <h3 class="fw-bold">₹ {{ total_revenue }}</h3>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm p-4 text-center">
+          <h6 class="text-muted">Total Orders</h6>
+          <h3 class="fw-bold">{{ total_orders }}</h3>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm p-4 text-center">
+          <h6 class="text-muted">Unique Customers</h6>
+          <h3 class="fw-bold">{{ total_customers }}</h3>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container-fluid">
+
+    <!-- Row 1 -->
+    <div class="row g-4">
+
+      <div class="col-md-6">
+        <div class="card shadow-sm p-3">
+          <h5 class="mb-3 fw-semibold">Customer Segments Distribution</h5>
+          <div class="chart-container">
+            <canvas id="segmentChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow-sm p-3">
+          <h5 class="mb-3 fw-semibold">Monthly Revenue Trend</h5>
+          <div class="chart-container">
+            <canvas id="revenueChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Row 2 -->
+    <div class="row g-4 mt-1">
+
+      <div class="col-md-6">
+        <div class="card shadow-sm p-3">
+          <h5 class="mb-3 fw-semibold">Top 10 High-Value Customers</h5>
+          <div class="chart-container">
+            <canvas id="topCustomersChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow-sm p-3">
+          <h5 class="mb-3 fw-semibold">Monetary Value Distribution</h5>
+          <div class="chart-container">
+            <canvas id="monetaryChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Row 3 -->
+    <div class="row g-4 mt-1">
+
+      <div class="col-md-12">
+        <div class="card shadow-sm p-3">
+          <h5 class="mb-3 fw-semibold">Recency vs Frequency Analysis</h5>
+          <div class="chart-container-large">
+            <canvas id="scatterChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 🔷 Chart Data Injection -->
+  <script>
+    const segmentData = {{ segment_counts | tojson }};
+    const revenueData = {{ monthly_revenue | tojson }};
+    const topCustomers = {{ top_customers | tojson }};
+    const monetaryDistribution = {{ monetary_distribution | tojson }};
+    const scatterData = {{ scatter_data | tojson }};
+  </script>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  <footer class="dashboard-footer">
+    <div class="container text-center">
+      <p class="mb-1">
+        Designed & Developed by <strong>Janice Betty</strong>
+      </p>
+      <p class="mb-0 small">
+        © <span id="year"></span> RFM Customer Analytics Dashboard | All Rights Reserved
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+
+</html>
