@@ -8,7 +8,10 @@ app.config.from_object(Config)
 
 db = SQLAlchemy(app)
 
+# IMPORT MODELS FIRST
+from flaskplot import models
+from flaskplot import routes
+
+# THEN create tables
 with app.app_context():
     db.create_all()
-
-from flaskplot import routes
