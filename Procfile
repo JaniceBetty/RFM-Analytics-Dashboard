@@ -1,1 +1,1 @@
-web: gunicorn flaskplot:app
+gunicorn flaskplot:app
