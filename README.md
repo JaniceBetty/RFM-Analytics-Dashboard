@@ -57,7 +57,7 @@ All processing is handled server-side using Pandas.
 ## 📂 Project Structure
 
 ```
-project_root/
+RFM-Analytics-Dashboard/
 │
 ├── flaskplot/
 │ ├── data/
