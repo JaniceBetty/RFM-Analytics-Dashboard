@@ -56,6 +56,7 @@ All processing is handled server-side using Pandas.
 
 ## 📂 Project Structure
 
+```
 project_root/
 │
 ├── flaskplot/
@@ -72,6 +73,7 @@ project_root/
 ├── run.py
 ├── requirements.txt
 └── .gitignore
+```
 
 ---
 
